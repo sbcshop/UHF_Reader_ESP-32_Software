@@ -55,10 +55,212 @@ This github page provides a getting started guide and other working details for 
 - (12) Battery Connector
 - (13) TF card slot
 
+#### GPIO Pins Detail
+<img src=" ">
+
+### Interfacing Details
+- ESP32 and UHF module interfacing
+  |Ardi-32 | UHF shield | Function |
+  |---|---|---|
+  | IO18 | U_RX | Serial Tx of UHF to Serial Rx of ESP32 |
+  | IO17 | U_TX | Serial Rx of UHF to Serial Tx of ESP32 |
+  | IO1 | U_EN | UHF Enable pin, LOW to disable and HIGH to enable |  
+
+  | ESP32 | UHF Module Pin | Function |
+  |---|---|---|
+  |GP4 (Tx) | UHF_RX | Serial UART connection |
+  |GP5 (Rx) | UHF_TX  | Serial UART connection |
+  |GP26 | EN  | UHF Reader enable pin, LOW to activate and HIGH to deactivate|
+
+- ESP32 and Display interfacing
+  
+  | ESP32 | Display Pin | Function |
+  |---|---|---|
+  |GP6 | SCLK | Clock pin of SPI interface for display|
+  |GP7 | DIN  | MOSI (Master OUT Slave IN) data pin of SPI interface|
+  |GP11 | DC | Data/Command pin of SPI interface|
+  |GP13 | CS   | Chip Select pin of SPI interface for display|
+  |GP14 | Reset | Display Reset Pin |
+  |GP12 | BL | Backlight of Display |
+  
+- ESP32 and micro SD card interfacing
+
+  | ESP32 | microSD Card | Function |
+  |---|---|---|
+  |GP18 | SCLK |Clock pin of SPI interface for microSD card |
+  |GP19 | DIN  | MOSI (Master OUT Slave IN) data pin of SPI interface|
+  |GP16 | DOUT | MISO (Master IN Slave OUT) data pin of SPI interface|
+  |GP17 | CS   | Chip Select pin of SPI interface for SDcard|
+
+- Buttons, Buzzer and LED Interfacing with ESP32
+  | ESP32 | Buttons | Function |
+  |---|---|---|
+  |GP10 | BT2 | programmable button |
+  |GP9 | BT3 | programmable button |
+  |GP8 | BT4 | programmable button |
+  |GP22 | Buzzer | Buzzer positive |
+  |GP25 | LED | OnBoard LED pin of Pico W  |
+ 
+- Breakout GPIOs
+  | ESP32 |Physical Pin | Multi-Function |
+  |---|---|---|
+  |GP0 | 1  | General IO / SPI0 RX / I2C0 SDA / UART0 TX |
+  |GP1 | 2 | General IO / SPI0 CSn / I2C0 SCL / UART0 RX |
+  |GP2 | 4 | General IO / SPI0 SCK / I2C1 SDA |
+  |GP3 | 5 | General IO / SPI0 TX / I2C1 SCL |
+  |GP21 | 27 | General IO / I2C0 SCL |
+  |GP20 | 26 | General IO / I2C0 SDA |
+  |GP28| 34 | General IO / ADC2 / SPI1 RX |
+  |GP15| 20 | General IO / SPI1 TX / I2C1 SCL|
 
 
+### Commands and Response of UHF module
 
+| Type | Description |
+|---|---|
+| 0x00 | Command Frame: send from PC/Controller to UHF Module chip |
+| 0x01 | Response Frame: send from UHF Module chip to PC/Controller |
+| 0x02 | Notice Frame: send from UHF Module chip to PC/Controller |  
 
+- Hardware version Check
+  
+  <img src="https://github.com/sbcshop/Ardi_UHF_Shield_Software/blob/main/images/hardware_version_cmd.png" width="573" height="270">
+
+  **Expected Response**
+  
+  <img src="https://github.com/sbcshop/Ardi_UHF_Shield_Software/blob/main/images/HW_response.png" width="573" height="270">
+
+  code snippets(header file)
+  ```
+  // Add here UHF commands in byte array format to configure, 
+  // refer Manual: https://github.com/sbcshop/Ardi_UHF_Shield_Software/blob/main/documents/UHF%20Commands%20Manual.pdf
+  static byte HARDWARE_VERSION[]    = {0XBB,0X00,0X03,0X00,0X01,0X00,0X04,0X7E};
+  static byte MULTIPLE_READ[]   = {0XBB, 0X00, 0X27, 0X00, 0X03, 0X22, 0X27, 0X10, 0X83, 0X7E};
+  static byte SINGLE_READ[]     = {0XBB,0X00,0X22,0X00,0X00,0X22,0X7E};
+  static byte STOP_READ[]       = {0XBB,0X00,0X28,0X00,0X00,0X28,0X7E};
+  ```
+  code snippets (main ino file)
+  ```
+  //Uncomment corresponding commands to configure UHF, more command can be added in UHF.h
+  #define commands HARDWARE_VERSION
+  //#define commands MULTIPLE_READ
+  //#define commands SINGLE_READ
+  //#define commands STOP_READ
+  ```
+  **Output on Terminal:**
+  
+  <img src="https://github.com/sbcshop/Ardi_UHF_Shield_Software/blob/main/images/hardware_version_terminal.png" width="573" height="270">
+
+- Similarly for Tag read
+  
+  <img src="https://github.com/sbcshop/Ardi_UHF_Shield_Software/blob/main/images/single_poll_cmd.png">
+
+  Required Command:
+  ```
+   static byte SINGLE_READ[]     = {0XBB,0X00,0X22,0X00,0X00,0X22,0X7E};
+  ```
+
+  **Output on Terminal:**
+  
+  <img src="https://github.com/sbcshop/Ardi_UHF_Shield_Software/blob/main/images/tag_read_terminal.png" width="573" height="270">
+
+### 1. Configure and Setup Development Environment
+   - Download Arduino IDE from [official site](https://www.arduino.cc/en/software) and install into your system. We have use Arduino IDE 1.8.19
+   - Once installation done will add ESP32 S3 board support into IDE, for this first you need to add below link into preference:
+     ``` https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json ```
+     
+     Select File > Preference, and add link as show in below image,
+      <img src= "https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/preference_board.gif" />
+      
+   - Now will install ESP32 based boards as shown in below image,
+
+     <img src= "https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/install_ESP32boards.gif" />
+     
+   - Once done, keeping default settings select the ESP32S3 Dev Module with suitable com port (may be different in your case) as shown below, 
+
+     <img src="https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/select_esp32_with_comport.gif">
+     
+### 2. Testing First Code
+   - At this step you are all set to test codes, for easy getting started we have provided various demo [example codes](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples) in github which you can download and try. 
+   - Open one example code in Arduino and make sure you have selected correct board with suitable com port, click on upload button to transfer code on Ardi-32.
+     <img src="https://github.com/sbcshop/ArdiFi_Software/blob/main/images/uploadCode.gif">
+    
+   - Checkout other examples below and build your own custom program codes using those references.
+
+### 3. Installing Libraries
+   - Download [library zip file](https://github.com/sbcshop/Ardi-32_Software/blob/main/libraries.zip) provided here in github.
+   - Extract and copy files inside Document > Arduino > Libraries folder. Make sure to restart Arduino IDE whenever you update or add any libraries.
+
+     <img src= "https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/library_files_path.png" />
+     
+### Example Codes
+   
+   In [example](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples) folder you will find demo examples to try out on ArdiFi
+   - [Buzzer](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples/buzzerDemo) : code to test onboard Buzze
+   - [SD card](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples/sdcard_Demo) : code to test onboard micro SD card interfacing
+   
+   Also, sample codes are available for Ardi32 shields
+   - [Ardi Relay shield Code](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples/Ardi32_relay_shield_interfacing) : code test switching of relays in sequence, for more details refer [Ardi-Relay Shield](https://github.com/sbcshop/Ardi_RFID_Shield_Software) 
+   - [Ardi RFID shield Code](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples/Ardi32_RFID_shield_interfacing) : code to test RFID module scan and switching of Relay, for more details refer [Ardi-RFID Shield](https://github.com/sbcshop/Ardi_RFID_Shield_Software) 
+   - [Ardi Display shield Code](https://github.com/sbcshop/Ardi-32_Software/tree/main/examples/Ardi32_Display_shield_interfacing) : testing of display and programmable buttons, for this example to try you need to install [libraries](https://github.com/sbcshop/Ardi-32_Software/blob/main/libraries.zip) provided in github. [Step 3](https://github.com/sbcshop/Ardi-32_Software/blob/main/README.md#3-installing-libraries) shows how to install libraries. For more details refer [Ardi-Display Shield](https://github.com/sbcshop/Ardi_Display_Shield_Software) 
+   - [Ardi UHF shield Code](https://github.com/sbcshop/Ardi-32_Software/tree/main/examples/Ardi32_UHF_shield_interfacing) : testing onboard UHF module, for more details refer [Ardi-UHF Shield](https://github.com/sbcshop/Ardi_UHF_Shield_Software) 
+   
+   Using this sample code as a guide, you can modify, build, and share codes!!  
+   
+## Resources
+  * [Schematic](https://github.com/sbcshop/ArdiFi_Hardware/blob/main/Design%20Data/SCH%20%20Ardi-32.pdf)
+  * [Hardware Files](https://github.com/sbcshop/ArdiFi_Hardware)
+  * [Step File](https://github.com/sbcshop/ArdiFi_Hardware/blob/main/Mechanical%20Data/STEP%20Ardi-32.step)
+  * [Getting Started with ESP32 in Arduino](https://docs.espressif.com/projects/arduino-esp32/en/latest/)
+  * [ESP32 S3 Hardware Reference](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/hw-reference/index.html)
+  * [ESP32 S3 Datasheet](https://github.com/sbcshop/3.2_Touchsy_ESP-32_Capacitive_Software/blob/main/documents/esp32-s3_datasheet_en.pdf)
+  * [Arduino IDE 1 overview](https://docs.arduino.cc/software/ide-v1/tutorials/Environment)
+### 1. Configure and Setup Development Environment
+   - Download Arduino IDE from [official site](https://www.arduino.cc/en/software) and install into your system. We have use Arduino IDE 1.8.19
+   - Once installation done will add ESP32 S3 board support into IDE, for this first you need to add below link into preference:
+     ``` https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json ```
+     
+     Select File > Preference, and add link as show in below image,
+      <img src= "https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/preference_board.gif" />
+      
+   - Now will install ESP32 based boards as shown in below image,
+
+     <img src= "https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/install_ESP32boards.gif" />
+     
+   - Once done, keeping default settings select the ESP32S3 Dev Module with suitable com port (may be different in your case) as shown below, 
+
+     <img src="https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/select_esp32_with_comport.gif">
+     
+### 2. Testing First Code
+   - At this step you are all set to test codes, for easy getting started we have provided various demo [example codes](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples) in github which you can download and try. 
+   - Open one example code in Arduino and make sure you have selected correct board with suitable com port, click on upload button to transfer code on Ardi-32.
+     <img src="https://github.com/sbcshop/ArdiFi_Software/blob/main/images/uploadCode.gif">
+    
+   - Checkout other examples below and build your own custom program codes using those references.
+
+### 3. Installing Libraries
+   - Download [library zip file](https://github.com/sbcshop/Ardi-32_Software/blob/main/libraries.zip) provided here in github.
+   - Extract and copy files inside Document > Arduino > Libraries folder. Make sure to restart Arduino IDE whenever you update or add any libraries.
+
+     <img src= "https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/library_files_path.png" />
+     
+### Example Codes
+   
+   In [example](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples) folder you will find demo examples to try out on ArdiFi
+   - [Buzzer](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples/buzzerDemo) : code to test onboard Buzze
+   - [SD card](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples/sdcard_Demo) : code to test onboard micro SD card interfacing
+   - [Ardi UHF shield Code](https://github.com/sbcshop/Ardi-32_Software/tree/main/examples/Ardi32_UHF_shield_interfacing) : testing onboard UHF module, for more details refer [Ardi-UHF Shield](https://github.com/sbcshop/Ardi_UHF_Shield_Software) 
+   
+   Using this sample code as a guide, you can modify, build, and share codes!!  
+   
+## Resources
+  * [Schematic](https://github.com/sbcshop/ArdiFi_Hardware/blob/main/Design%20Data/SCH%20%20Ardi-32.pdf)
+  * [Hardware Files](https://github.com/sbcshop/ArdiFi_Hardware)
+  * [Step File](https://github.com/sbcshop/ArdiFi_Hardware/blob/main/Mechanical%20Data/STEP%20Ardi-32.step)
+  * [Getting Started with ESP32 in Arduino](https://docs.espressif.com/projects/arduino-esp32/en/latest/)
+  * [ESP32 S3 Hardware Reference](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/hw-reference/index.html)
+  * [ESP32 S3 Datasheet](https://github.com/sbcshop/3.2_Touchsy_ESP-32_Capacitive_Software/blob/main/documents/esp32-s3_datasheet_en.pdf)
+  * [Arduino IDE 1 overview](https://docs.arduino.cc/software/ide-v1/tutorials/Environment)
 
 ## Related Products
    * [UHF Reader for Pico W](https://shop.sb-components.co.uk/products/uhf-reader-based-on-pico-w-esp32?variant=40586828447827) - UHF Reader powered by RPi Pico W
