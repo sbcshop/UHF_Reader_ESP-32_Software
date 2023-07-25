@@ -113,6 +113,34 @@ This github page provides a getting started guide and other working details for 
   |GP28| 34 | General IO / ADC2 / SPI1 RX |
   |GP15| 20 | General IO / SPI1 TX / I2C1 SCL|
 
+### 1. Configure and Setup Development Environment
+   - Download Arduino IDE from [official site](https://www.arduino.cc/en/software) and install into your system. We have use Arduino IDE 1.8.19
+   - Once installation done will add ESP32 S3 board support into IDE, for this first you need to add below link into preference:
+     ``` https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json ```
+     
+     Select File > Preference, and add link as show in below image,
+      <img src= "https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/preference_board.gif" />
+      
+   - Now will install ESP32 based boards as shown in below image,
+
+     <img src= "https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/install_ESP32boards.gif" />
+     
+   - Once done, keeping default settings select the ESP32S3 Dev Module with suitable com port (may be different in your case) as shown below, 
+
+     <img src="https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/select_esp32_with_comport.gif">
+     
+### 2. Testing First Code
+   - At this step you are all set to test codes, for easy getting started we have provided various demo [example codes](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples) in github which you can download and try. 
+   - Open one example code in Arduino and make sure you have selected correct board with suitable com port, click on upload button to transfer code on Ardi-32.
+     <img src="https://github.com/sbcshop/ArdiFi_Software/blob/main/images/uploadCode.gif">
+    
+   - Checkout other examples below and build your own custom program codes using those references.
+
+### 3. Installing Libraries
+   - Download [library zip file](https://github.com/sbcshop/Ardi-32_Software/blob/main/libraries.zip) provided here in github.
+   - Extract and copy files inside Document > Arduino > Libraries folder. Make sure to restart Arduino IDE whenever you update or add any libraries.
+
+     <img src= "https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/library_files_path.png" />
 
 ### Commands and Response of UHF module
 
@@ -164,35 +192,6 @@ This github page provides a getting started guide and other working details for 
   
   <img src="https://github.com/sbcshop/Ardi_UHF_Shield_Software/blob/main/images/tag_read_terminal.png" width="573" height="270">
 
-### 1. Configure and Setup Development Environment
-   - Download Arduino IDE from [official site](https://www.arduino.cc/en/software) and install into your system. We have use Arduino IDE 1.8.19
-   - Once installation done will add ESP32 S3 board support into IDE, for this first you need to add below link into preference:
-     ``` https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json ```
-     
-     Select File > Preference, and add link as show in below image,
-      <img src= "https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/preference_board.gif" />
-      
-   - Now will install ESP32 based boards as shown in below image,
-
-     <img src= "https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/install_ESP32boards.gif" />
-     
-   - Once done, keeping default settings select the ESP32S3 Dev Module with suitable com port (may be different in your case) as shown below, 
-
-     <img src="https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/select_esp32_with_comport.gif">
-     
-### 2. Testing First Code
-   - At this step you are all set to test codes, for easy getting started we have provided various demo [example codes](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples) in github which you can download and try. 
-   - Open one example code in Arduino and make sure you have selected correct board with suitable com port, click on upload button to transfer code on Ardi-32.
-     <img src="https://github.com/sbcshop/ArdiFi_Software/blob/main/images/uploadCode.gif">
-    
-   - Checkout other examples below and build your own custom program codes using those references.
-
-### 3. Installing Libraries
-   - Download [library zip file](https://github.com/sbcshop/Ardi-32_Software/blob/main/libraries.zip) provided here in github.
-   - Extract and copy files inside Document > Arduino > Libraries folder. Make sure to restart Arduino IDE whenever you update or add any libraries.
-
-     <img src= "https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/library_files_path.png" />
-     
 ### Example Codes
    
    In [example](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples) folder you will find demo examples to try out on ArdiFi
