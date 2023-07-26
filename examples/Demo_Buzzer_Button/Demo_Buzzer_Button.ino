@@ -1,4 +1,4 @@
-// Demo code to test onboard Buzzer and Button working
+// Demo code to test onboard Buzzer and Button working 
 const int buzzerPin = 8;    // buzzer at GPIO40
 const int bootButton = 0;   // button 1 at GPIO4
 const int userButton1 = 4;  // programmable button 1 at GPIO4
