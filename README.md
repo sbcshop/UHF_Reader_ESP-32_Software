@@ -63,50 +63,57 @@ This github page provides a getting started guide and other working details for 
   
   | ESP32 | UHF Module Pin | Function |
   |---|---|---|
-  |GP4 (Tx) | UHF_RX | Serial UART connection |
-  |GP5 (Rx) | UHF_TX  | Serial UART connection |
-  |GP26 | EN  | UHF Reader enable pin, LOW to activate and HIGH to deactivate|
+  |IO17 (U1TXD) | RX | Serial UART connection |
+  |IO18 (U1RXD) | TX  | Serial UART connection |
+  |IO21 | UHF_EN  | UHF Reader enable pin, LOW to activate and HIGH to deactivate|
 
 - ESP32 and Display interfacing
   
   | ESP32 | Display Pin | Function |
   |---|---|---|
-  |GP6 | SCLK | Clock pin of SPI interface for display|
-  |GP7 | DIN  | MOSI (Master OUT Slave IN) data pin of SPI interface|
-  |GP11 | DC | Data/Command pin of SPI interface|
-  |GP13 | CS   | Chip Select pin of SPI interface for display|
-  |GP14 | Reset | Display Reset Pin |
-  |GP12 | BL | Backlight of Display |
+  | IO12 | SCLK | Clock pin of SPI interface for display|
+  | IO11 | DIN  | MOSI (Master OUT Slave IN) data pin of SPI interface|
+  | IO13 | DC | Data/Command pin of SPI interface|
+  | IO10 | CS   | Chip Select pin of SPI interface for display|
+  | IO14 | RST | Display Reset Pin |
+  | IO9 | BL | Backlight of Display |
   
 - ESP32 and micro SD card interfacing
 
   | ESP32 | microSD Card | Function |
   |---|---|---|
-  |GP18 | SCLK |Clock pin of SPI interface for microSD card |
-  |GP19 | DIN  | MOSI (Master OUT Slave IN) data pin of SPI interface|
-  |GP16 | DOUT | MISO (Master IN Slave OUT) data pin of SPI interface|
-  |GP17 | CS   | Chip Select pin of SPI interface for SDcard|
+  | IO42 | SCLK |Clock pin of SPI interface for microSD card |
+  | IO2 | DIN  | MOSI (Master OUT Slave IN) data pin of SPI interface|
+  | IO41 | DOUT | MISO (Master IN Slave OUT) data pin of SPI interface|
+  | IO1 | CS   | Chip Select pin of SPI interface for SDcard|
 
-- Buttons, Buzzer and LED Interfacing with ESP32
+- Buttons and Buzzer Interfacing with ESP32
   | ESP32 | Buttons | Function |
   |---|---|---|
-  |GP10 | BT2 | programmable button |
-  |GP9 | BT3 | programmable button |
-  |GP8 | BT4 | programmable button |
-  |GP22 | Buzzer | Buzzer positive |
-  |GP25 | LED | OnBoard LED pin of Pico W  |
+  | IO5 | BT1 | programmable button |
+  | IO4 | BT2 | programmable button |
+  | IO0 | BOOT | BOOT button |
+  | IO8 | Buzzer | Buzzer positive |
  
-- Breakout GPIOs
+- GPIOs _Breakout 1_
   | ESP32 |Physical Pin | Multi-Function |
   |---|---|---|
-  |GP0 | 1  | General IO / SPI0 RX / I2C0 SDA / UART0 TX |
-  |GP1 | 2 | General IO / SPI0 CSn / I2C0 SCL / UART0 RX |
-  |GP2 | 4 | General IO / SPI0 SCK / I2C1 SDA |
-  |GP3 | 5 | General IO / SPI0 TX / I2C1 SCL |
-  |GP21 | 27 | General IO / I2C0 SCL |
-  |GP20 | 26 | General IO / I2C0 SDA |
-  |GP28| 34 | General IO / ADC2 / SPI1 RX |
-  |GP15| 20 | General IO / SPI1 TX / I2C1 SCL|
+  | 5V | - | Positive 5V supply |
+  |IO3 | 15  | RTC_GPIO3, GPIO3, TOUCH3, ADC1_CH2  |
+  |IO7 | 7 | RTC_GPIO7, GPIO7, TOUCH7, ADC1_CH6 |
+  |IO16 | 9 | RTC_GPIO16, GPIO16, U0CTS, ADC2_CH5, XTAL_32K_N |
+  |IO15| 8 | RTC_GPIO15, GPIO15, U0RTS, ADC2_CH4, XTAL_32K_P |
+  |GND | - | Supply ground pin |
+  
+- GPIOs _Breakout 2_
+  | ESP32 |Physical Pin | Multi-Function |
+  |---|---|---|
+  | 3.3V | - | Positive 3.3V supply |
+  | IO38 | 31 | GPIO38, FSPIWP, SUBSPIWP |
+  | IO39 | 32 | MTCK, GPIO39, CLK_OUT3, SUBSPICS1 |
+  | IO46 | 16 | GPIO46 |
+  | IO40 | 33 | MTDO, GPIO40, CLK_OUT2 |
+  | GND | - | Supply ground pin |
 
 ### 1. Configure and Setup Development Environment
    - Download Arduino IDE from [official site](https://www.arduino.cc/en/software) and install into your system. We have use Arduino IDE 1.8.19
@@ -125,7 +132,7 @@ This github page provides a getting started guide and other working details for 
      <img src="https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/select_esp32_with_comport.gif">
      
 ### 2. Testing First Code
-   - At this step you are all set to test codes, for easy getting started we have provided various demo [example codes](https://github.com/sbcshop/ArdiFi_Software/tree/main/examples) in github which you can download and try. 
+   - At this step you are all set to test codes, for easy getting started we have provided various demo [example codes](https://github.com/sbcshop/UHF_Reader_ESP-32_Software/tree/main/examples) in github which you can download and try. 
    - Open one example code in Arduino and make sure you have selected correct board with suitable com port, click on upload button to transfer code on Ardi-32.
      <img src="https://github.com/sbcshop/ArdiFi_Software/blob/main/images/uploadCode.gif">
     
@@ -189,7 +196,7 @@ This github page provides a getting started guide and other working details for 
 
 ### Example Codes
    
-   In [example]() folder you will find demo examples to try out on UHF reader for ESP32 board, some demo listed below
+   In [example](https://github.com/sbcshop/UHF_Reader_ESP-32_Software/tree/main/examples) folder you will find demo examples to try out on UHF reader for ESP32 board, some demo listed below
    - [Buzzer Demo]() : code to test onboard Buzzer
    - [Display Demo]() : testing code for display
    - [SD card Demo]() : code to test onboard micro SD card interfacing
@@ -198,12 +205,12 @@ This github page provides a getting started guide and other working details for 
    Using this sample code as a guide, you can modify, build, and share codes!!  
    
 ## Resources
-  * [Schematic]()
-  * [Hardware Files]()
-  * [Step File]()
+  * [Schematic](https://github.com/sbcshop/UHF_Reader_ESP-32_Hardware/blob/main/Design%20Data/UHF%20Reader%20ESP32%20SCH.pdf)
+  * [Hardware Files](https://github.com/sbcshop/UHF_Reader_ESP-32_Hardware/)
+  * [Step File](https://github.com/sbcshop/UHF_Reader_ESP-32_Hardware/blob/main/Mechanical%20Data/Step%20UHF%20Reader%20for%20ESP32.step)
   * [Getting Started with ESP32 in Arduino](https://docs.espressif.com/projects/arduino-esp32/en/latest/)
   * [ESP32 S3 Hardware Reference](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/hw-reference/index.html)
-  * [ESP32 S3 Datasheet](https://github.com/sbcshop/3.2_Touchsy_ESP-32_Capacitive_Software/blob/main/documents/esp32-s3_datasheet_en.pdf)
+  * [ESP32 S3 WROOM 1 Datasheet](https://github.com/sbcshop/UHF_Reader_ESP-32_Software/blob/main/documents/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf)
   * [Arduino IDE 1 overview](https://docs.arduino.cc/software/ide-v1/tutorials/Environment)
 
 ## Related Products
