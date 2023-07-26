@@ -55,9 +55,6 @@ This github page provides a getting started guide and other working details for 
 - (12) Battery Connector
 - (13) TF card slot
 
-#### GPIO Pins Detail
-<img src=" ">
-
 ### Interfacing Details
 - ESP32 and UHF module interfacing
   
