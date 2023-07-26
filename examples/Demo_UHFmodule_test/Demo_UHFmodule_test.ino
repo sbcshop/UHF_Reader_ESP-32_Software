@@ -1,3 +1,10 @@
+/*
+  Demo code to test working of UHF module, 
+  basically some of operation demonstrated from UHF manual like
+  2.1  Get the reader module information
+  2.2  Single polling command
+  2.3  Several times polling command
+*/
 #include <HardwareSerial.h>
 #include "Uhf.h"
 
