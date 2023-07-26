@@ -133,13 +133,13 @@ This github page provides a getting started guide and other working details for 
      
 ### 2. Testing First Code
    - At this step you are all set to test codes, for easy getting started we have provided various demo [example codes](https://github.com/sbcshop/UHF_Reader_ESP-32_Software/tree/main/examples) in github which you can download and try. 
-   - Open one example code in Arduino and make sure you have selected correct board with suitable com port, click on upload button to transfer code on Ardi-32.
+   - Open one example code in Arduino and make sure you have selected correct board with suitable com port, click on upload button to transfer code on ESP32 of UHF reader Board.
      <img src="https://github.com/sbcshop/ArdiFi_Software/blob/main/images/uploadCode.gif">
     
    - Checkout other examples below and build your own custom program codes using those references.
 
 ### 3. Installing Libraries
-   - Download [library zip file]() provided here in github.
+   - Download [library zip file](https://github.com/sbcshop/UHF_Reader_ESP-32_Software/blob/main/libraries.zip) provided here in github.
    - Extract and copy files inside Document > Arduino > Libraries folder. Make sure to restart Arduino IDE whenever you update or add any libraries.
 
      <img src= "https://github.com/sbcshop/3.2_Touchsy_ESP-32_Resistive_Software/blob/main/images/library_files_path.png" />
@@ -163,7 +163,7 @@ This github page provides a getting started guide and other working details for 
   code snippets(header file)
   ```
   // Add here UHF commands in byte array format to configure, 
-  // refer Manual: https://github.com/sbcshop/Ardi_UHF_Shield_Software/blob/main/documents/UHF%20Commands%20Manual.pdf
+  // refer Manual: https://github.com/sbcshop/UHF_Reader_ESP-32_Software/blob/main/documents/UHF%20Commands%20Manual.pdf
   static byte HARDWARE_VERSION[]    = {0XBB,0X00,0X03,0X00,0X01,0X00,0X04,0X7E};
   static byte MULTIPLE_READ[]   = {0XBB, 0X00, 0X27, 0X00, 0X03, 0X22, 0X27, 0X10, 0X83, 0X7E};
   static byte SINGLE_READ[]     = {0XBB,0X00,0X22,0X00,0X00,0X22,0X7E};
@@ -194,13 +194,15 @@ This github page provides a getting started guide and other working details for 
   
   <img src="https://github.com/sbcshop/Ardi_UHF_Shield_Software/blob/main/images/tag_read_terminal.png" width="573" height="270">
 
+  For more detail refer [Manual](https://github.com/sbcshop/UHF_Reader_ESP-32_Software/blob/main/documents/UHF%20Commands%20Manual.pdf) for various UHF module commands.
+  
 ### Example Codes
    
    In [example](https://github.com/sbcshop/UHF_Reader_ESP-32_Software/tree/main/examples) folder you will find demo examples to try out on UHF reader for ESP32 board, some demo listed below
-   - [Buzzer Demo]() : code to test onboard Buzzer
-   - [Display Demo]() : testing code for display
-   - [SD card Demo]() : code to test onboard micro SD card interfacing
-   - [UHF Module Demo]() : testing onboard UHF module 
+   - [Buzzer Demo](https://github.com/sbcshop/UHF_Reader_ESP-32_Software/blob/main/examples/Demo_Buzzer_Button) : code to test onboard Buzzer and Buttons
+   - [Display Demo](https://github.com/sbcshop/UHF_Reader_ESP-32_Software/blob/main/examples/Demo_Display) : testing code for display
+   - [SD card Demo](https://github.com/sbcshop/UHF_Reader_ESP-32_Software/tree/main/examples/Demo_sdcard) : code to test onboard micro SD card interfacing
+   - [UHF Module Demo](https://github.com/sbcshop/UHF_Reader_ESP-32_Software/tree/main/examples/Demo_UHFmodule_test) : testing onboard UHF module 
    
    Using this sample code as a guide, you can modify, build, and share codes!!  
    
