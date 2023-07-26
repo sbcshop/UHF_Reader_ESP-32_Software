@@ -4,9 +4,9 @@
 #define mySerial Serial2
 
 //Uncomment corresponding commands to configure UHF, more command can be added in UHF.h
-#define COMMANDS HARDWARE_VERSION
+//#define COMMANDS HARDWARE_VERSION
 //#define COMMANDS MULTIPLE_READ
-//#define COMMANDS SINGLE_READ
+#define COMMANDS SINGLE_READ
 //#define COMMANDS STOP_READ
 
 void setup() {
