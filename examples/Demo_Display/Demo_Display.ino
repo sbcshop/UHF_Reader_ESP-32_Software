@@ -1,4 +1,4 @@
-// Demo code for onboard 1.14" Display Testing 
+// Demo code for onboard 1.14" Display Testing  
 #include <SPI.h>
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <Adafruit_ST7789.h> // Hardware-specific library for ST7789
