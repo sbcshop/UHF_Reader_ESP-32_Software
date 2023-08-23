@@ -1,4 +1,4 @@
-![image](https://github.com/sbcshop/UHF_Reader_ESP-32_Software/assets/129948335/f0902e63-0861-4401-917b-1b718560b17d)# UHF_Reader_ESP-32_Software
+# UHF_Reader_ESP-32_Software
 <img src="https://cdn.shopify.com/s/files/1/1217/2104/files/DiscriptivebannerUHFReader_e60e9388-d82b-4252-b0c7-54cb48fd2b04.jpg?v=1690438714">
 
 This github page provides a getting started guide and other working details for the UHF reader for ESP32. The UHF Reader for ESP32 is a rapid multi-tag reading device for efficient and effective inventory management.
@@ -130,8 +130,11 @@ This github page provides a getting started guide and other working details for 
      
    - In case you don't see com port then you will have to install CP2102 driver from [Link](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads). Download and install as per your operating system.
      * check below one recommmend for windows user
+       
        <img src="https://github.com/sbcshop/Ardi-32_Software/blob/main/images/cp2102_driver_link.png" width="626" height="377">
+       
      * Once successfully installed then it appears as shown in below image
+       
        <img src="https://github.com/sbcshop/Ardi-32_Software/blob/main/images/device_manager_view.png" width="488" height="353">
        
 ### 2. Testing First Code
