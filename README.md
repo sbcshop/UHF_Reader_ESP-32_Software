@@ -25,7 +25,7 @@ This github page provides a getting started guide and other working details for 
 - UHF Module:
   - UHF Frequency Range :  EU/UK -> 865.1-867.9 MHz, US-> 902.25-927.75 MHz
   - Protocols Supported : EPCglobal UHF Class 1 Gen 2 / ISO 18000-6C
-  - Onboard Antenna
+  - Onboard Integrated Antenna (having Circular polarity)
   - Reading Distance: 1-1.5 meters depending tags 
   - Can identify over 50 tags simultaneously
   - Communication interface: TTL UART Interface for UHF
