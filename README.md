@@ -1,11 +1,12 @@
 # UHF_Reader_ESP-32_Software
-<img src="https://cdn.shopify.com/s/files/1/1217/2104/files/DiscriptivebannerUHFReader_e60e9388-d82b-4252-b0c7-54cb48fd2b04.jpg?v=1690438714">
+<img src="https://cdn.shopify.com/s/files/1/1217/2104/files/bannerUHFReaderforpico-esp32.png?v=1701237229">
 
 This github page provides a getting started guide and other working details for the UHF reader for ESP32. The UHF Reader for ESP32 is a rapid multi-tag reading device for efficient and effective inventory management.
 
 ### Features:
 - UHF Reader for ESP32 is powered by ESP32 S3 WROOM - 1
 - Onboard High-performance UHF RFID reader module
+- Both read and write operations 
 - 24 hours x 365 days’ work normally
 - 1.14” TFT display for visual interaction
 - Multi-tone Buzzer onboard for Audio alerts
@@ -24,6 +25,7 @@ This github page provides a getting started guide and other working details for 
 - ST7789 display driver
 - UHF Module:
   - UHF Frequency Range :  EU/UK -> 865.1-867.9 MHz, US-> 902.25-927.75 MHz
+  - UHF module type : Read and Write
   - Protocols Supported : EPCglobal UHF Class 1 Gen 2 / ISO 18000-6C
   - Onboard Integrated Antenna (having Circular polarity)
   - Reading Distance: 1-1.5 meters depending tags 
